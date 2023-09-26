@@ -1,0 +1,21 @@
+body {
+    font-family: 'Maven Pro', sans-serif;
+}
+
+.pokemon-list {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.purple-button {
+    background-color: rgb(184, 178, 178);
+    border: 2px solid rgb(184, 178, 178);
+    width: 100%;
+    margin: 3px;
+    text-align: left;
+    padding: 7px;
+}
+
+.purple-button:hover {
+    border: 2px solid red;
+}

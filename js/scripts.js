@@ -1,7 +1,5 @@
-let pokemonList = [];
-
 let pokemonRepository = (function () {
-    pokemonList = [
+    const pokemonList = [
         {
             name: 'Bulbasaur',
             type: ['Grass', 'Poison'],
@@ -23,13 +21,49 @@ let pokemonRepository = (function () {
             height: 0.4
         }
     ];
-    return {
-        add: function (pokemon) {
+
+    function add(pokemon) {
+        if (
+            typeof pokemon === "object" &&
+            "name" in pokemon &&
+            "height" in pokemon &&
+            "types" in pokemon
+        ) {
             pokemonList.push(pokemon);
-        },
-        getAll: function () {
-            return pokemonList;
+        } else {
+            console.log("pokemon is not correct");
         }
+    };
+
+    function getAll() {
+        return pokemonList
+    };
+
+
+    function addListItem(pokemon) {
+        let pokemonList = document.querySelector('.pokemon-list')
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('purple-button');
+        listItem.appendChild(button);
+        pokemonList.appendChild(listItem);
+        // Event Listener that showDetails with a click
+        button.addEventListener('click', function(event) {
+            showDetails(pokemon);
+        });
+    };
+
+    function showDetails(pokemon) {
+        console.log(pokemon);
+    };
+
+
+    return {
+        add: add,
+        getAll: getAll,
+        addListItem: addListItem,
+        showDetails: showDetails
     };
 })();
 
@@ -47,11 +81,6 @@ let pokemonRepository = (function () {
 
 
 // forEach loop instead of the for loop
-pokemonRepository.getAll().forEach (function (pokemon) {
-    document.write(pokemon.name + ' (height: ' + pokemon.height + ')');
-    if (pokemon.height === 0.7) {
-        document.write(' - Wow, that\'s big!' + '<br>');
-    } else {
-        document.write('<br>');
-    }
+pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
 });
